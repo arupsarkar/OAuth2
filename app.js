@@ -45,9 +45,14 @@ app.get('/oauth2/callback', function(req, res) {
       console.log("Org ID: " + userInfo.organizationId);
       sessionId = conn.accessToken;
       instanceUrl = conn.instanceUrl;
-      res.send('success'); // or your desired response
+      res.redirect('/api/accounts');
   });
 });
+
+
+app.get('/api/accounts', function(req, res){
+  res.send('List of accounts')
+})
 
 
 app.get('/oauth2/logout', function(req, res){
