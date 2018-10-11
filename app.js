@@ -13,7 +13,7 @@ app.get('/api', function (req, res) {
 //
 var oauth2 = new jsforce.OAuth2({
   // you can change loginUrl to connect to sandbox or prerelease env.
-  // loginUrl : 'https://test.salesforce.com',
+  loginUrl : 'https://login.salesforce.com',
   clientId : '3MVG9vrJTfRxlfl6.9Upr1O8slMibVd3G1F5RlhmnogXRkjm1MqMJhatonREOl_nqyDiaPk3iuJdXuhAC.f89',
   clientSecret : '2744620778573943675',
   redirectUri : 'http://oauth-sfdc.herokuapp.com/oauth2/callback'
