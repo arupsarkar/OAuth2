@@ -33,17 +33,31 @@ app.get('/oauth2/callback', function(req, res) {
   var code = req.param('code');
   conn.authorize(code, function(err, userInfo) {
     if (err) { return console.error(err); }
-    // Now you can get the access token, refresh token, and instance URL information.
-    // Save them to establish connection next time.
-    console.log(conn.accessToken);
-    console.log(conn.refreshToken);
-    console.log(conn.instanceUrl);
-    console.log("User ID: " + userInfo.id);
-    console.log("Org ID: " + userInfo.organizationId);
-    // ...
-    res.send('success'); // or your desired response
+      // Now you can get the access token, refresh token, and instance URL information.
+      // Save them to establish connection next time.
+      console.log(conn.accessToken);
+      console.log(conn.refreshToken);
+      console.log(conn.instanceUrl);
+      console.log("User ID: " + userInfo.id);
+      console.log("Org ID: " + userInfo.organizationId);
+      // ...
+      res.send('success'); // or your desired response
   });
 });
+
+
+app.get('/oauth2/logout', function(req, res){
+  console.log('>>>>> Session : ', req.session)
+
+  // var conn = new jsforce.Connection({
+  //   sessionId : '<session id to logout>',
+  //   serverUrl : '<your Salesforce Server url to logout>'
+  // });
+  // conn.logout(function(err) {
+  //   if (err) { return console.error(err); }
+  //   // now the session has been expired.
+  // });
+})
 
 
 var UserController = require(__root + 'user/UserController');
