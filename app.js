@@ -60,7 +60,11 @@ app.get('/oauth2/logout', function(req, res){
     serverUrl : instanceUrl
   });
   conn.logout(function(err) {
-    if (err) { return console.error(err); }
+    if (err) { 
+      return console.error(err); 
+    }else{
+      res.send('user logged out successfully.')
+    }
     // now the session has been expired.
   });
 })
