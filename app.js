@@ -16,7 +16,7 @@ var oauth2 = new jsforce.OAuth2({
   // loginUrl : 'https://test.salesforce.com',
   clientId : '3MVG9vrJTfRxlfl6.9Upr1O8slMibVd3G1F5RlhmnogXRkjm1MqMJhatonREOl_nqyDiaPk3iuJdXuhAC.f89',
   clientSecret : '2744620778573943675',
-  redirectUri : 'http://localhost:3000/oauth2/callback'
+  redirectUri : 'http://oauth-sfdc.herokuapp.com/oauth2/callback'
 });
 //
 // Get authorization url and redirect to it.
