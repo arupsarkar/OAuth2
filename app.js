@@ -40,19 +40,50 @@ app.get('/oauth2/callback', function(req, res) {
       console.log(conn.instanceUrl);
       console.log("User ID: " + userInfo.id);
       console.log("Org ID: " + userInfo.organizationId);
-      // ...
+
+      //call set cookie to store access token and instance url
+      setCookie('sf_access_token', conn.accessToken, 1);
+      setCookie('sf_instance_url', conn.instanceUrl, 1);
       res.send('success'); // or your desired response
   });
 });
 
 
+//cookie management
+// set cookie
+function setCookie(cname, cvalue, exdays) {
+  var d = new Date();
+  d.setTime(d.getTime() + (exdays*24*60*60*1000));
+  var expires = "expires="+ d.toUTCString();
+  document.cookie = cname + "=" + cvalue + ";" + expires + ";path=/";
+}
+
+function getCookie(cname) {
+  var name = cname + "=";
+  var decodedCookie = decodeURIComponent(document.cookie);
+  var ca = decodedCookie.split(';');
+  for(var i = 0; i <ca.length; i++) {
+      var c = ca[i];
+      while (c.charAt(0) == ' ') {
+          c = c.substring(1);
+      }
+      if (c.indexOf(name) == 0) {
+          return c.substring(name.length, c.length);
+      }
+  }
+  return "";
+}
+
 app.get('/oauth2/logout', function(req, res){
-  console.log('>>>>> Session id : ', req.session.accessToken);
-  console.log('>>>>> instance url : ', req.session.instanceUrl);  
+  var sessionId = getCookie('sf_access_token');
+  var instanceUrl = getCookie('sf_instance_url');
+
+  console.log('>>>>> Session id : ', sessionId);
+  console.log('>>>>> instance url : ', instanceUrl);  
 
   var conn = new jsforce.Connection({
-    sessionId : req.session.accessToken,
-    serverUrl : req.session.instanceUrl
+    sessionId : sessionId,
+    serverUrl : instanceUrl
   });
   conn.logout(function(err) {
     if (err) { return console.error(err); }
