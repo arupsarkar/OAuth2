@@ -47,12 +47,12 @@ app.get('/oauth2/callback', function(req, res) {
 
 
 app.get('/oauth2/logout', function(req, res){
-  console.log('>>>>> Session id : ', req.query.accessToken);
-  console.log('>>>>> instance url : ', req.query.instanceUrl);  
+  console.log('>>>>> Session id : ', req.session.accessToken);
+  console.log('>>>>> instance url : ', req.session.instanceUrl);  
 
   var conn = new jsforce.Connection({
-    sessionId : req.query.accessToken,
-    serverUrl : req.query.instanceUrl
+    sessionId : req.session.accessToken,
+    serverUrl : req.session.instanceUrl
   });
   conn.logout(function(err) {
     if (err) { return console.error(err); }
