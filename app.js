@@ -38,6 +38,7 @@ app.get('/oauth2/callback', function(req, res) {
       console.log(conn.accessToken);
       console.log(conn.refreshToken);
       console.log(conn.instanceUrl);
+      console.log(conn.sessionId)
       console.log("User ID: " + userInfo.id);
       console.log("Org ID: " + userInfo.organizationId);
       // ...
@@ -47,7 +48,7 @@ app.get('/oauth2/callback', function(req, res) {
 
 
 app.get('/oauth2/logout', function(req, res){
-  console.log('>>>>> Session : ', req.session)
+  console.log('>>>>> Session : ', req.session);
 
   // var conn = new jsforce.Connection({
   //   sessionId : '<session id to logout>',
