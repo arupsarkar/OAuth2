@@ -38,7 +38,7 @@ app.get('/oauth2/callback', function(req, res) {
       console.log(conn.accessToken);
       console.log(conn.refreshToken);
       console.log(conn.instanceUrl);
-      console.log(conn.sessionId)
+      console.log(conn.session.id)
       console.log("User ID: " + userInfo.id);
       console.log("Org ID: " + userInfo.organizationId);
       // ...
